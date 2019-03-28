@@ -12,14 +12,22 @@
     <artifactId>adopt-javafx-application</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-        </dependency>
+        <!-- ===============================================================================  -->
+        <!--                Adopt                                                             -->
+        <!-- ===============================================================================  -->
 
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>adopt-javafx-mainwindow</artifactId>
+        </dependency>
+
+        <!-- ===============================================================================  -->
+        <!--                JavaFX                                                            -->
+        <!-- ===============================================================================  -->
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
         </dependency>
     </dependencies>
 
