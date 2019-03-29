@@ -1,8 +1,5 @@
-# Adopt TopComponents Example
+# Adopt Examples
 
-Example that illustrates how to use the Adopt JavaFX TopComponents Api to add content to the application window.
+This folder contains all the examples with Adopt:
 
-## Modules
-
-- **adopt-example-topcomponents-app**: Application module that integrates the entire application with example modules 
-and Adopt Modules.
+- [adopt-example-topcomponents](adopt-example-topcomponents/README.md): Illustrates how to use the Adopt JavaFX TopComponents Api.
