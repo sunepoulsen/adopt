@@ -1,4 +1,4 @@
-# Adopt TopComponents Ex**ample
+# Adopt TopComponents Example
 
 Example that illustrates how to use the Adopt JavaFX TopComponents Api to add content to the application window.
 
