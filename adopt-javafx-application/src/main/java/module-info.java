@@ -1,6 +1,7 @@
 module adopt.javafx.application {
+    requires adopt.javafx.window.system;
     requires javafx.controls;
-    requires adopt.javafx.mainwindow;
+    requires javafx.fxml;
 
     requires slf4j.api;
 

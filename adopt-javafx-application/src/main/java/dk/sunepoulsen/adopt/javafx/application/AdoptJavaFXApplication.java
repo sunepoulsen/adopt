@@ -1,12 +1,17 @@
 package dk.sunepoulsen.adopt.javafx.application;
 
-import dk.sunepoulsen.adopt.javafx.mainwindow.MainWindow;
+import dk.sunepoulsen.adopt.javafx.window.system.mainwindow.MainWindow;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.URL;
 
 /**
  * Application class for an Adopt JavaFX Application.
@@ -27,9 +32,16 @@ public class AdoptJavaFXApplication extends Application {
     public void start( Stage primaryStage ) throws Exception {
         log.debug( "Creating primary stage" );
 
-        MainWindow mainWindow = new MainWindow();
+        URL url = MainWindow.class.getResource( "mainwindow.fxml" );
+        FXMLLoader loader = new FXMLLoader( url );
+        Parent root = loader.load();
+        if( !( root instanceof BorderPane ) ) {
+            throw new IllegalStateException( "FXML must load a BorderPane from " + url.toString() );
+        }
+        MainWindow mainWindow = loader.getController();
+        mainWindow.configureWindowModes( ( BorderPane ) root );
 
-        Scene scene = new Scene( mainWindow );
+        Scene scene = new Scene( root );
 
         primaryStage.setTitle( "Application Title" );
         primaryStage.setScene( scene );

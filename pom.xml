@@ -15,6 +15,8 @@
         <module>adopt-javafx-application</module>
         <module>adopt-javafx-mainwindow</module>
         <module>adopt-examples</module>
+        <module>adopt-javafx-window-system-api</module>
+        <module>adopt-javafx-window-system</module>
     </modules>
 
     <properties>
@@ -55,6 +57,16 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>adopt-javafx-mainwindow</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-javafx-window-system</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-javafx-window-system-api</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
 
