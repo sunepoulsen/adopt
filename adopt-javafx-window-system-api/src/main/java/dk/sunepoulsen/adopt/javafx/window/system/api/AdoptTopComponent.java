@@ -15,6 +15,26 @@ public interface AdoptTopComponent {
     String modeIdentifier();
 
     /**
+     * Returns the Window Mode options for this TopComponent.
+     */
+    AdoptTopComponentWindowModeOptions getWindowModeOptions();
+
+    /**
+     * Sets the Window mode options for this TopComponent.
+     *
+     * @param windowModeOptions An instance of Window mode options that matches the Window Mode that is specified in
+     *                          <code>modeIdentifier</code>
+     */
+    void setWindowModeOptions( AdoptTopComponentWindowModeOptions windowModeOptions );
+
+    /**
+     * Sets the WindowSystemModelIntegrator of this TopComponent.
+     *
+     * @param windowSystemModelIntegrator The Window System Model integrator.
+     */
+    void setWindowSystemModelIntegrator( WindowSystemModelIntegrator windowSystemModelIntegrator );
+
+    /**
      * Gets the Node that represents ths UI of the TopComponent.
      *
      * <p>

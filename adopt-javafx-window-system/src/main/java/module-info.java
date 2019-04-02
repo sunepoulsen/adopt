@@ -1,4 +1,5 @@
 module adopt.javafx.window.system {
+    requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
 
