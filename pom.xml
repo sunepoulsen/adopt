@@ -13,10 +13,10 @@
     <modules>
         <module>adopt-core</module>
         <module>adopt-javafx-application</module>
-        <module>adopt-javafx-mainwindow</module>
         <module>adopt-examples</module>
         <module>adopt-javafx-window-system-api</module>
         <module>adopt-javafx-window-system</module>
+        <module>adopt-environment</module>
     </modules>
 
     <properties>
@@ -48,15 +48,15 @@
                 <artifactId>adopt-core</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-environment</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>adopt-javafx-application</artifactId>
-                <version>${adopt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>adopt-javafx-mainwindow</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
             <dependency>
@@ -88,6 +88,16 @@
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-graphics</artifactId>
                 <version>${javafx.version}</version>
+            </dependency>
+
+            <!-- ===============================================================================  -->
+            <!--                Utilities                                                         -->
+            <!-- ===============================================================================  -->
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>27.1-jre</version>
             </dependency>
 
             <!-- ===============================================================================  -->
