@@ -1,5 +1,7 @@
 module adopt.javafx.application {
+    requires adopt.environment;
     requires adopt.javafx.window.system;
+
     requires javafx.controls;
     requires javafx.fxml;
 

@@ -1,5 +1,6 @@
 package dk.sunepoulsen.adopt.javafx.application;
 
+import dk.sunepoulsen.adopt.environment.Environment;
 import dk.sunepoulsen.adopt.javafx.window.system.mainwindow.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * Application class for an Adopt JavaFX Application.
@@ -19,21 +21,7 @@ import java.net.URL;
 public class AdoptJavaFXApplication extends Application {
     private static Logger log = LoggerFactory.getLogger( AdoptJavaFXApplication.class );
 
-    protected URL mainWindowFXMLUrl;
-    protected String applicationTitle;
-
     public AdoptJavaFXApplication() {
-        this.mainWindowFXMLUrl = MainWindow.class.getResource( "mainwindow.fxml" );
-        this.applicationTitle = "Application Title";
-    }
-
-    /**
-     * Main launch function that will start the JavaFX application.
-     *
-     * @param args Arguments from the command line.
-     */
-    public static void launchApplication( String[] args ) {
-        launch( args );
     }
 
     /**
@@ -49,7 +37,16 @@ public class AdoptJavaFXApplication extends Application {
     public void start( Stage primaryStage ) throws Exception {
         log.debug( "Creating primary stage" );
 
-        FXMLLoader loader = new FXMLLoader( this.mainWindowFXMLUrl );
+        Environment env = new Environment();
+
+        URL mainWindowFXMLUrl = Objects.requireNonNull( MainWindow.class.getResource( "mainwindow.fxml" ) );
+        if( env.containsKey( "mainwindow.fxml" ) ) {
+            mainWindowFXMLUrl = Objects.requireNonNull( ClassLoader.getSystemResource( env.getProperty( "mainwindow.fxml", String.class ) ) );
+        }
+        String applicationTitle = env.getProperty( "application.name", String.class, "Application Title" );
+
+        FXMLLoader loader = new FXMLLoader( mainWindowFXMLUrl );
+        log.debug( "Loading Window modes from {}", mainWindowFXMLUrl.toString() );
         Parent root = loader.load();
         if( !( root instanceof BorderPane ) ) {
             throw new IllegalStateException( "FXML must load a BorderPane from " + mainWindowFXMLUrl.toString() );
@@ -60,7 +57,7 @@ public class AdoptJavaFXApplication extends Application {
 
         Scene scene = new Scene( root );
 
-        primaryStage.setTitle( this.applicationTitle );
+        primaryStage.setTitle( applicationTitle );
         primaryStage.setScene( scene );
 
         // Maximize the window

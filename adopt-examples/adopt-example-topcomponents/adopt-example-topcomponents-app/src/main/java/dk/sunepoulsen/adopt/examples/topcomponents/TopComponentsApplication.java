@@ -13,13 +13,6 @@ import java.util.Properties;
 public class TopComponentsApplication extends AdoptJavaFXApplication {
     private static Logger log = LoggerFactory.getLogger( TopComponentsApplication.class );
 
-    public TopComponentsApplication() {
-        super();
-
-        this.applicationTitle = "TopComponents Example";
-        this.mainWindowFXMLUrl = TopComponentsApplication.class.getResource( "/mainwindow.fxml" );
-    }
-
     /**
      * Main function.
      *
