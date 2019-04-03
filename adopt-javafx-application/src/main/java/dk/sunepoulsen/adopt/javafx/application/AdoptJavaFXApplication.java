@@ -19,31 +19,48 @@ import java.net.URL;
 public class AdoptJavaFXApplication extends Application {
     private static Logger log = LoggerFactory.getLogger( AdoptJavaFXApplication.class );
 
+    protected URL mainWindowFXMLUrl;
+    protected String applicationTitle;
+
+    public AdoptJavaFXApplication() {
+        this.mainWindowFXMLUrl = MainWindow.class.getResource( "mainwindow.fxml" );
+        this.applicationTitle = "Application Title";
+    }
+
     /**
      * Main launch function that will start the JavaFX application.
      *
      * @param args Arguments from the command line.
      */
     public static void launchApplication( String[] args ) {
-        launch( AdoptJavaFXApplication.class, args );
+        launch( args );
+    }
+
+    /**
+     * Main launch function that will start the JavaFX application.
+     *
+     * @param args Arguments from the command line.
+     */
+    public static void launchApplication( Class<? extends Application> clazz, String[] args ) {
+        launch( clazz, args );
     }
 
     @Override
     public void start( Stage primaryStage ) throws Exception {
         log.debug( "Creating primary stage" );
 
-        URL url = MainWindow.class.getResource( "mainwindow.fxml" );
-        FXMLLoader loader = new FXMLLoader( url );
+        FXMLLoader loader = new FXMLLoader( this.mainWindowFXMLUrl );
         Parent root = loader.load();
         if( !( root instanceof BorderPane ) ) {
-            throw new IllegalStateException( "FXML must load a BorderPane from " + url.toString() );
+            throw new IllegalStateException( "FXML must load a BorderPane from " + mainWindowFXMLUrl.toString() );
         }
         MainWindow mainWindow = loader.getController();
         mainWindow.configureWindowModes( ( BorderPane ) root );
+        mainWindow.createStartupTopComponents();
 
         Scene scene = new Scene( root );
 
-        primaryStage.setTitle( "Application Title" );
+        primaryStage.setTitle( this.applicationTitle );
         primaryStage.setScene( scene );
 
         // Maximize the window

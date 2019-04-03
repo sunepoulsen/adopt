@@ -35,6 +35,11 @@ public interface AdoptTopComponent {
     void setWindowSystemModelIntegrator( WindowSystemModelIntegrator windowSystemModelIntegrator );
 
     /**
+     * Tells the Window System to create this TopComponent at startup of the Main Window.
+     */
+    boolean createOnStartup();
+
+    /**
      * Gets the Node that represents ths UI of the TopComponent.
      *
      * <p>
