@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import dk.sunepoulsen.adopt.javafx.window.system.modes.*?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="dk.sunepoulsen.adopt.javafx.window.system.mainwindow.MainWindow">
+    <top>
+        <AdoptAnchorMode modeIdentifier="toolbar"/>
+    </top>
+    <left>
+        <AdoptAnchorMode modeIdentifier="navigation"/>
+    </left>
+    <center>
+        <AdoptAnchorMode modeIdentifier="content"/>
+    </center>
+    <right>
+        <AdoptAnchorMode modeIdentifier="right"/>
+    </right>
+    <bottom>
+        <AdoptAnchorMode modeIdentifier="statusbar"/>
+    </bottom>
+</BorderPane>

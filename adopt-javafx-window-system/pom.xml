@@ -9,21 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>adopt-javafx-application</artifactId>
+    <artifactId>adopt-javafx-window-system</artifactId>
 
     <dependencies>
-        <!-- ===============================================================================  -->
-        <!--                Adopt                                                             -->
-        <!-- ===============================================================================  -->
-
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>adopt-javafx-window-system</artifactId>
+            <groupId>dk.sunepoulsen.adopt</groupId>
+            <artifactId>adopt-javafx-window-system-api</artifactId>
         </dependency>
-
-        <!-- ===============================================================================  -->
-        <!--                JavaFX                                                            -->
-        <!-- ===============================================================================  -->
 
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -33,6 +25,17 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>27.1-jre</version>
+        </dependency>
+
     </dependencies>
 
 </project>

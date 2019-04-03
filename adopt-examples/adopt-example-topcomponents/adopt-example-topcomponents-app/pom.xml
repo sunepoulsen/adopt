@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>adopt-project</artifactId>
+        <artifactId>adopt-example-topcomponents</artifactId>
         <groupId>dk.sunepoulsen.adopt</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>adopt-javafx-application</artifactId>
+    <artifactId>adopt-example-topcomponents-app</artifactId>
 
     <dependencies>
         <!-- ===============================================================================  -->
@@ -17,21 +17,25 @@
         <!-- ===============================================================================  -->
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>adopt-javafx-window-system</artifactId>
+            <groupId>dk.sunepoulsen.adopt</groupId>
+            <artifactId>adopt-javafx-application</artifactId>
         </dependency>
 
         <!-- ===============================================================================  -->
-        <!--                JavaFX                                                            -->
+        <!--                Logging                                                           -->
         <!-- ===============================================================================  -->
 
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
     </dependencies>
 

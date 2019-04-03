@@ -14,6 +14,9 @@
         <module>adopt-core</module>
         <module>adopt-javafx-application</module>
         <module>adopt-javafx-mainwindow</module>
+        <module>adopt-examples</module>
+        <module>adopt-javafx-window-system-api</module>
+        <module>adopt-javafx-window-system</module>
     </modules>
 
     <properties>
@@ -23,6 +26,9 @@
         <!-- Library versions -->
         <adopt.version>${project.version}</adopt.version>
         <javafx.version>11.0.2</javafx.version>
+        <log4j-over-slf4j.version>1.7.21</log4j-over-slf4j.version>
+        <logback-core.version>1.1.7</logback-core.version>
+        <logback-classic.version>${logback-core.version}</logback-classic.version>
         <slf4j.version>1.7.25</slf4j.version>
 
         <!-- Plugin versions -->
@@ -51,6 +57,16 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>adopt-javafx-mainwindow</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-javafx-window-system</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-javafx-window-system-api</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
 
@@ -84,6 +100,21 @@
                 <version>${slf4j.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>${log4j-over-slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
