@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
  * Implements a Window Mode with a single parent component that can contain a single TopComponent.
  */
 public class AdoptAnchorMode extends AnchorPane implements AdoptWindowMode {
+    private static AdoptAnchorModeOptions defaultModeOptions = new AdoptAnchorModeOptions();
+
     private String modeIdentifier;
     private ObservableList<AdoptTopComponent> topComponents;
     private ReadOnlyListWrapper<AdoptTopComponent> topComponentsWrapper;
@@ -45,19 +47,24 @@ public class AdoptAnchorMode extends AnchorPane implements AdoptWindowMode {
 
     @Override
     public void addTopComponent( AdoptTopComponent topComponent ) {
+        AdoptAnchorModeOptions modeOptions = defaultModeOptions;
         if( topComponent.getWindowModeOptions() instanceof AdoptAnchorModeOptions ) {
-            AdoptAnchorModeOptions options = ( AdoptAnchorModeOptions ) topComponent.getWindowModeOptions();
-
-            AnchorPane.setTopAnchor( topComponent.getNode(), options.getTopAnchor() );
-            AnchorPane.setLeftAnchor( topComponent.getNode(), options.getLeftAnchor() );
-            AnchorPane.setRightAnchor( topComponent.getNode(), options.getRightAnchor() );
-            AnchorPane.setBottomAnchor( topComponent.getNode(), options.getBottomAnchor() );
+            modeOptions = ( AdoptAnchorModeOptions ) topComponent.getWindowModeOptions();
         }
+
+        AnchorPane.setTopAnchor( topComponent.getNode(), modeOptions.getTopAnchor() );
+        AnchorPane.setLeftAnchor( topComponent.getNode(), modeOptions.getLeftAnchor() );
+        AnchorPane.setRightAnchor( topComponent.getNode(), modeOptions.getRightAnchor() );
+        AnchorPane.setBottomAnchor( topComponent.getNode(), modeOptions.getBottomAnchor() );
+
+        getChildren().clear();
+        this.topComponents.clear();
 
         if( getChildren().add( topComponent.getNode() ) ) {
-            layout();
             this.topComponents.add( topComponent );
         }
+
+        layout();
     }
 
     @Override
