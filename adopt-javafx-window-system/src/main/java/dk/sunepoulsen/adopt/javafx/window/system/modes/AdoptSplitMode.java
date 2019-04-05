@@ -4,9 +4,7 @@ import dk.sunepoulsen.adopt.javafx.window.system.api.AdoptTopComponent;
 import dk.sunepoulsen.adopt.javafx.window.system.api.AdoptWindowMode;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.ReadOnlyListWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.SplitPane;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,19 +13,14 @@ import java.util.stream.Collectors;
 /**
  * Implements a Window Mode with a single parent component that can contain a single TopComponent.
  */
-public class AdoptAnchorMode extends AnchorPane implements AdoptWindowMode {
-    private static AdoptAnchorModeOptions defaultModeOptions = new AdoptAnchorModeOptions();
-
+public class AdoptSplitMode extends SplitPane implements AdoptWindowMode {
     private String modeIdentifier;
-    private ObservableList<AdoptTopComponent> topComponents;
-    private ReadOnlyListWrapper<AdoptTopComponent> topComponentsWrapper;
+    private ReadOnlyListWrapper<AdoptTopComponent> topComponents;
 
-    public AdoptAnchorMode() {
+    public AdoptSplitMode() {
         super();
-
         this.modeIdentifier = null;
-        this.topComponents = FXCollections.observableArrayList();
-        this.topComponentsWrapper = new ReadOnlyListWrapper<>( this.topComponents );
+        this.topComponents = new ReadOnlyListWrapper<>();
     }
 
     @Override
@@ -42,29 +35,15 @@ public class AdoptAnchorMode extends AnchorPane implements AdoptWindowMode {
 
     @Override
     public ReadOnlyListProperty<AdoptTopComponent> topComponents() {
-        return this.topComponentsWrapper.getReadOnlyProperty();
+        return this.topComponents.getReadOnlyProperty();
     }
 
     @Override
     public void addTopComponent( AdoptTopComponent topComponent ) {
-        AdoptAnchorModeOptions modeOptions = defaultModeOptions;
-        if( topComponent.getWindowModeOptions() instanceof AdoptAnchorModeOptions ) {
-            modeOptions = ( AdoptAnchorModeOptions ) topComponent.getWindowModeOptions();
-        }
-
-        AnchorPane.setTopAnchor( topComponent.getNode(), modeOptions.getTopAnchor() );
-        AnchorPane.setLeftAnchor( topComponent.getNode(), modeOptions.getLeftAnchor() );
-        AnchorPane.setRightAnchor( topComponent.getNode(), modeOptions.getRightAnchor() );
-        AnchorPane.setBottomAnchor( topComponent.getNode(), modeOptions.getBottomAnchor() );
-
-        getChildren().clear();
-        this.topComponents.clear();
-
         if( getChildren().add( topComponent.getNode() ) ) {
+            layout();
             this.topComponents.add( topComponent );
         }
-
-        layout();
     }
 
     @Override

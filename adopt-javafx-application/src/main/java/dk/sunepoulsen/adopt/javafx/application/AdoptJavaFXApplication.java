@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -20,8 +21,10 @@ import java.util.Objects;
  */
 public class AdoptJavaFXApplication extends Application {
     private static Logger log = LoggerFactory.getLogger( AdoptJavaFXApplication.class );
+    private Environment env;
 
     public AdoptJavaFXApplication() {
+        this.env = new Environment();
     }
 
     /**
@@ -37,13 +40,15 @@ public class AdoptJavaFXApplication extends Application {
     public void start( Stage primaryStage ) throws Exception {
         log.debug( "Creating primary stage" );
 
-        Environment env = new Environment();
+        if( env.containsKey( "application.locale" ) ) {
+            Locale.setDefault( Locale.forLanguageTag( env.getString( "application.locale" ) ) );
+        }
 
         URL mainWindowFXMLUrl = Objects.requireNonNull( MainWindow.class.getResource( "mainwindow.fxml" ) );
         if( env.containsKey( "mainwindow.fxml" ) ) {
-            mainWindowFXMLUrl = Objects.requireNonNull( ClassLoader.getSystemResource( env.getProperty( "mainwindow.fxml", String.class ) ) );
+            mainWindowFXMLUrl = Objects.requireNonNull( ClassLoader.getSystemResource( env.getString( "mainwindow.fxml" ) ) );
         }
-        String applicationTitle = env.getProperty( "application.name", String.class, "Application Title" );
+        String applicationTitle = env.getString( "application.name", "Application Title" );
 
         FXMLLoader loader = new FXMLLoader( mainWindowFXMLUrl );
         log.debug( "Loading Window modes from {}", mainWindowFXMLUrl.toString() );
@@ -56,6 +61,14 @@ public class AdoptJavaFXApplication extends Application {
         mainWindow.createStartupTopComponents();
 
         Scene scene = new Scene( root );
+
+        if( env.containsKey( "mainwindow.stylesheet" ) ) {
+            String styleSheet = Objects.requireNonNull( ClassLoader.getSystemResource( env.getString( "mainwindow.stylesheet" ) ).toString() );
+
+            log.info( "Using stylesheet: {}", styleSheet );
+            scene.getStylesheets().add( styleSheet );
+        }
+
 
         primaryStage.setTitle( applicationTitle );
         primaryStage.setScene( scene );
