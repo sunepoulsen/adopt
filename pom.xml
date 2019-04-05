@@ -17,6 +17,8 @@
         <module>adopt-javafx-window-system-api</module>
         <module>adopt-javafx-window-system</module>
         <module>adopt-environment</module>
+        <module>adopt-jpa</module>
+        <module>adopt-jpa-liquibase</module>
     </modules>
 
     <properties>
