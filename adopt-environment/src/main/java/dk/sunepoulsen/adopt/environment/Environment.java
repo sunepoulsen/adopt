@@ -66,6 +66,14 @@ public class Environment {
         return getProperty( key, clazz );
     }
 
+    public String getString( String key ) throws EnvironmentException {
+        return getProperty( key, String.class );
+    }
+
+    public String getString( String key, String defaultValue ) throws EnvironmentException {
+        return getProperty( key, String.class, defaultValue );
+    }
+
     private void readEnvironmentFromProviders() {
         ServiceLoader<EnvironmentProvider> loader = ServiceLoader.load( EnvironmentProvider.class );
 
