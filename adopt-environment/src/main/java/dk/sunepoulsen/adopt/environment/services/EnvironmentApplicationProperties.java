@@ -5,9 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Properties;
 
 public class EnvironmentApplicationProperties implements EnvironmentProvider {
@@ -15,18 +15,34 @@ public class EnvironmentApplicationProperties implements EnvironmentProvider {
 
     @Override
     public Map<String, Object> readEnvironment() {
-        Map<String, Object> applicationProperties = new HashMap<>();
+        Map<String, Object> map = new HashMap<>( readFromResource( "application.properties" ) );
 
-        Properties resourceProperties = new Properties();
+        if( System.getProperties().containsKey( "adopt.profile.name" ) ) {
+            map.putAll( readFromResource( "application-" + System.getProperties().getProperty( "adopt.profile.name" ) + ".properties" ) );
+        }
+
+        return map;
+    }
+
+    private Map<String, Object> readFromResource( String resourceName ) {
+        Map<String, Object> map = new HashMap<>();
+
+        Properties properties = new Properties();
         try {
-            resourceProperties.load( Objects.requireNonNull( ClassLoader.getSystemResourceAsStream( "application.properties" ) ) );
-            resourceProperties
-                .forEach( ( key, value ) -> applicationProperties.put( key.toString(), value ) );
+            InputStream resourceStream = ClassLoader.getSystemResourceAsStream( resourceName );
+            if( resourceStream == null ) {
+                log.error( "Unable to load resource /" + resourceName );
+            }
+            else {
+                properties.load( resourceStream );
+                properties
+                    .forEach( ( key, value ) -> map.put( key.toString(), value ) );
+            }
         }
         catch( IOException ex ) {
-            log.error( "Unable to load resource /application.properties", ex );
+            log.error( "Unable to read properties from resource /" + resourceName, ex );
         }
 
-        return applicationProperties;
+        return map;
     }
 }
