@@ -57,6 +57,14 @@ public class AdoptJavaFXApplication extends Application {
 
         Scene scene = new Scene( root );
 
+        if( env.containsKey( "mainwindow.stylesheet" ) ) {
+            String styleSheet = Objects.requireNonNull( ClassLoader.getSystemResource( env.getProperty( "mainwindow.stylesheet", String.class ) ).toString() );
+
+            log.info( "Using stylesheet: {}", styleSheet );
+            scene.getStylesheets().add( styleSheet );
+        }
+
+
         primaryStage.setTitle( applicationTitle );
         primaryStage.setScene( scene );
 
