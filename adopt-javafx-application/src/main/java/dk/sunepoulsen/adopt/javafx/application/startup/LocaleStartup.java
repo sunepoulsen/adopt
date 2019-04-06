@@ -1,7 +1,7 @@
 package dk.sunepoulsen.adopt.javafx.application.startup;
 
-import dk.sunepoulsen.adopt.environment.Environment;
-import dk.sunepoulsen.adopt.environment.EnvironmentException;
+import dk.sunepoulsen.adopt.core.environment.Environment;
+import dk.sunepoulsen.adopt.core.environment.EnvironmentException;
 
 import java.util.Locale;
 

@@ -1,6 +1,7 @@
 package dk.sunepoulsen.adopt.javafx.application;
 
-import dk.sunepoulsen.adopt.environment.Environment;
+import dk.sunepoulsen.adopt.core.environment.Environment;
+import dk.sunepoulsen.adopt.javafx.application.handlers.ApplicationModuleHandler;
 import dk.sunepoulsen.adopt.javafx.application.startup.LocaleStartup;
 import dk.sunepoulsen.adopt.javafx.application.startup.SceneStartup;
 import javafx.application.Application;
@@ -32,7 +33,10 @@ public class AdoptJavaFXApplication extends Application {
     public void start( Stage primaryStage ) throws Exception {
         log.debug( "Creating primary stage" );
 
+        env.logProperties();
         LocaleStartup.initializeLocale( env );
+
+        ApplicationModuleHandler.modulesStartup();
 
         SceneStartup sceneStartup = new SceneStartup( env );
         sceneStartup.loadMainWindow();
@@ -44,5 +48,6 @@ public class AdoptJavaFXApplication extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
+        ApplicationModuleHandler.modulesShutdown();
     }
 }

@@ -12,11 +12,11 @@
 
     <modules>
         <module>adopt-core</module>
-        <module>adopt-javafx-application</module>
         <module>adopt-examples</module>
+        <module>adopt-javafx-application</module>
+        <module>adopt-javafx-application-api</module>
         <module>adopt-javafx-window-system-api</module>
         <module>adopt-javafx-window-system</module>
-        <module>adopt-environment</module>
         <module>adopt-jpa</module>
         <module>adopt-jpa-liquibase</module>
     </modules>
@@ -50,15 +50,15 @@
                 <artifactId>adopt-core</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>adopt-environment</artifactId>
-                <version>${adopt.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>adopt-javafx-application</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-javafx-application-api</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
             <dependency>
@@ -69,6 +69,16 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>adopt-javafx-window-system-api</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-jpa</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-jpa-liquibase</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
 
