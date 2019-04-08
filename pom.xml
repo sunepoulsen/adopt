@@ -28,6 +28,7 @@
         <!-- Library versions -->
         <adopt.version>${project.version}</adopt.version>
         <javafx.version>11.0.2</javafx.version>
+        <liquibase-core.version>3.6.3</liquibase-core.version>
         <log4j-over-slf4j.version>1.7.21</log4j-over-slf4j.version>
         <logback-core.version>1.1.7</logback-core.version>
         <logback-classic.version>${logback-core.version}</logback-classic.version>
@@ -100,6 +101,16 @@
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-graphics</artifactId>
                 <version>${javafx.version}</version>
+            </dependency>
+
+            <!-- ===============================================================================  -->
+            <!--                Database                                                          -->
+            <!-- ===============================================================================  -->
+
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase-core.version}</version>
             </dependency>
 
             <!-- ===============================================================================  -->

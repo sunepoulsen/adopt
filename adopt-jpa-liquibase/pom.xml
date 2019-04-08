@@ -11,5 +11,18 @@
 
     <artifactId>adopt-jpa-liquibase</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>dk.sunepoulsen.adopt</groupId>
+            <artifactId>adopt-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dk.sunepoulsen.adopt</groupId>
+            <artifactId>adopt-javafx-application-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>
