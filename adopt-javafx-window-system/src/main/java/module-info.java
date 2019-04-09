@@ -7,8 +7,7 @@ module adopt.javafx.window.system {
 
     requires com.google.common;
 
-    requires adopt.javafx.window.system.api;
-
+    exports dk.sunepoulsen.adopt.javafx.window.system.api;
     exports dk.sunepoulsen.adopt.javafx.window.system.mainwindow;
     exports dk.sunepoulsen.adopt.javafx.window.system.modes;
 
