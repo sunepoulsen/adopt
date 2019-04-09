@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Environment {
     private static Logger log = LoggerFactory.getLogger( Environment.class );
@@ -25,6 +26,10 @@ public class Environment {
                 .sorted( Comparator.comparing( Map.Entry::getKey ) )
                 .forEach( entry -> log.debug( "{} ==> {}", entry.getKey(), entry.getValue() ) );
         }
+    }
+
+    public Stream<Map.Entry<String, Object>> stream() {
+        return properties.entrySet().stream();
     }
 
     public boolean containsKey( String key ) {

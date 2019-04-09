@@ -15,9 +15,11 @@ import org.slf4j.LoggerFactory;
 public class AdoptJavaFXApplication extends Application {
     private static Logger log = LoggerFactory.getLogger( AdoptJavaFXApplication.class );
     private Environment env;
+    private ApplicationModuleHandler applicationModuleHandler;
 
     public AdoptJavaFXApplication() {
         this.env = new Environment();
+        this.applicationModuleHandler = new ApplicationModuleHandler();
     }
 
     /**
@@ -36,7 +38,7 @@ public class AdoptJavaFXApplication extends Application {
         env.logProperties();
         LocaleStartup.initializeLocale( env );
 
-        ApplicationModuleHandler.modulesStartup();
+        this.applicationModuleHandler.modulesStartup();
 
         SceneStartup sceneStartup = new SceneStartup( env );
         sceneStartup.loadMainWindow();
@@ -48,6 +50,6 @@ public class AdoptJavaFXApplication extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        ApplicationModuleHandler.modulesShutdown();
+        this.applicationModuleHandler.modulesShutdown();
     }
 }

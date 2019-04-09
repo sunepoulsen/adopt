@@ -17,8 +17,6 @@
         <module>adopt-javafx-application-api</module>
         <module>adopt-javafx-window-system-api</module>
         <module>adopt-javafx-window-system</module>
-        <module>adopt-jpa</module>
-        <module>adopt-jpa-liquibase</module>
     </modules>
 
     <properties>
@@ -27,6 +25,7 @@
 
         <!-- Library versions -->
         <adopt.version>${project.version}</adopt.version>
+        <hibernate-core.version>5.3.7.Final</hibernate-core.version>
         <javafx.version>11.0.2</javafx.version>
         <liquibase-core.version>3.6.3</liquibase-core.version>
         <log4j-over-slf4j.version>1.7.21</log4j-over-slf4j.version>
@@ -111,6 +110,11 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-core</artifactId>
                 <version>${liquibase-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate-core.version}</version>
             </dependency>
 
             <!-- ===============================================================================  -->

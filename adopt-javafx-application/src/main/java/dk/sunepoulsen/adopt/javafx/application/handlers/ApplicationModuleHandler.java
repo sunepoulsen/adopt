@@ -8,21 +8,21 @@ import java.util.Comparator;
 import java.util.ServiceLoader;
 
 public class ApplicationModuleHandler {
-    public static void modulesStartup() {
-        loadModules().stream()
+    private ArrayList<AdoptJavaFXApplicationModule> modules;
+
+    public ApplicationModuleHandler() {
+        this.modules = Lists.newArrayList( ServiceLoader.load( AdoptJavaFXApplicationModule.class ).iterator() );
+    }
+
+    public void modulesStartup() {
+        modules.stream()
             .sorted( Comparator.comparing( AdoptJavaFXApplicationModule::getExecutionOrder ) )
             .forEach( AdoptJavaFXApplicationModule::applicationStartup );
     }
 
-    public static void modulesShutdown() {
-        loadModules().stream()
+    public void modulesShutdown() {
+        modules.stream()
             .sorted( Comparator.comparing( AdoptJavaFXApplicationModule::getExecutionOrder ).reversed() )
             .forEach( AdoptJavaFXApplicationModule::applicationShutdown );
-    }
-
-    private static ArrayList<AdoptJavaFXApplicationModule> loadModules() {
-        ServiceLoader<AdoptJavaFXApplicationModule> loader = ServiceLoader.load( AdoptJavaFXApplicationModule.class );
-
-        return Lists.newArrayList( loader.iterator() );
     }
 }
