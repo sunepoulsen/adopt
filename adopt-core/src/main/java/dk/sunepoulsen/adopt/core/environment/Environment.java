@@ -1,11 +1,12 @@
-package dk.sunepoulsen.adopt.environment;
+package dk.sunepoulsen.adopt.core.environment;
 
 import com.google.common.collect.Lists;
-import dk.sunepoulsen.adopt.environment.api.EnvironmentProvider;
+import dk.sunepoulsen.adopt.core.environment.api.EnvironmentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Environment {
     private static Logger log = LoggerFactory.getLogger( Environment.class );
@@ -15,7 +16,9 @@ public class Environment {
     public Environment() {
         this.properties = new HashMap<>();
         readEnvironmentFromProviders();
+    }
 
+    public void logProperties() {
         if( log.isDebugEnabled() ) {
             log.debug( "Environment properties:" );
             log.debug( "=======================" );
@@ -23,6 +26,10 @@ public class Environment {
                 .sorted( Comparator.comparing( Map.Entry::getKey ) )
                 .forEach( entry -> log.debug( "{} ==> {}", entry.getKey(), entry.getValue() ) );
         }
+    }
+
+    public Stream<Map.Entry<String, Object>> stream() {
+        return properties.entrySet().stream();
     }
 
     public boolean containsKey( String key ) {

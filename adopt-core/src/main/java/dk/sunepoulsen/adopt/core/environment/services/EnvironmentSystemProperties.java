@@ -1,6 +1,6 @@
-package dk.sunepoulsen.adopt.environment.services;
+package dk.sunepoulsen.adopt.core.environment.services;
 
-import dk.sunepoulsen.adopt.environment.api.EnvironmentProvider;
+import dk.sunepoulsen.adopt.core.environment.api.EnvironmentProvider;
 
 import java.util.HashMap;
 import java.util.Map;

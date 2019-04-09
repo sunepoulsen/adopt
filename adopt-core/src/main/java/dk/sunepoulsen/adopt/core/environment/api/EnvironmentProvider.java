@@ -1,4 +1,4 @@
-package dk.sunepoulsen.adopt.environment.api;
+package dk.sunepoulsen.adopt.core.environment.api;
 
 import java.util.Map;
 
