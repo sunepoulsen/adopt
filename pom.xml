@@ -15,6 +15,7 @@
         <module>adopt-examples</module>
         <module>adopt-javafx-application</module>
         <module>adopt-javafx-window-system</module>
+        <module>adopt-javafx-explorer</module>
     </modules>
 
     <properties>
