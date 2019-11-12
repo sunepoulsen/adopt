@@ -15,6 +15,9 @@
         <module>adopt-examples</module>
         <module>adopt-javafx-application</module>
         <module>adopt-javafx-window-system</module>
+        <module>adopt-cli-application</module>
+        <module>adopt-cli-command-api</module>
+        <module>adopt-cli-commandline</module>
     </modules>
 
     <properties>
@@ -23,6 +26,7 @@
 
         <!-- Library versions -->
         <adopt.version>${project.version}</adopt.version>
+        <commons-cli.version>1.4</commons-cli.version>
         <hibernate-core.version>5.3.7.Final</hibernate-core.version>
         <javafx.version>11.0.2</javafx.version>
         <liquibase-core.version>3.6.3</liquibase-core.version>
@@ -46,6 +50,22 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>adopt-core</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-cli-application</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-cli-command-api</artifactId>
+                <version>${adopt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>adopt-cli-commandline</artifactId>
                 <version>${adopt.version}</version>
             </dependency>
 
@@ -93,6 +113,16 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate-core.version}</version>
+            </dependency>
+
+            <!-- ===============================================================================  -->
+            <!--                Apache                                                            -->
+            <!-- ===============================================================================  -->
+
+            <dependency>
+                <groupId>commons-cli</groupId>
+                <artifactId>commons-cli</artifactId>
+                <version>${commons-cli.version}</version>
             </dependency>
 
             <!-- ===============================================================================  -->
