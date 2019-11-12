@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>adopt-cli-application</artifactId>
+    <artifactId>adopt-cli-commandline</artifactId>
+
 
     <dependencies>
         <!-- ===============================================================================  -->
@@ -17,7 +18,7 @@
         <!-- ===============================================================================  -->
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>dk.sunepoulsen.adopt</groupId>
             <artifactId>adopt-core</artifactId>
         </dependency>
 
@@ -26,9 +27,13 @@
             <artifactId>adopt-cli-command-api</artifactId>
         </dependency>
 
+        <!-- ===============================================================================  -->
+        <!--                Utilities                                                         -->
+        <!-- ===============================================================================  -->
+
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>adopt-cli-commandline</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
     </dependencies>
 </project>
