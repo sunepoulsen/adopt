@@ -81,6 +81,14 @@ public class Environment {
         return getProperty( key, String.class, defaultValue );
     }
 
+    public Boolean getBoolean( String key ) throws EnvironmentException {
+        return getProperty( key, Boolean.class );
+    }
+
+    public Boolean getBoolean( String key, Boolean defaultValue ) throws EnvironmentException {
+        return getProperty( key, Boolean.class, defaultValue );
+    }
+
     private void readEnvironmentFromProviders() {
         ServiceLoader<EnvironmentProvider> loader = ServiceLoader.load( EnvironmentProvider.class );
 

@@ -1,7 +1,5 @@
 package dk.sunepoulsen.adopt.core.os.services;
 
-import dk.sunepoulsen.adopt.core.environment.Environment;
-import dk.sunepoulsen.adopt.core.environment.EnvironmentException;
 import dk.sunepoulsen.adopt.core.os.api.OperatingSystem;
 import dk.sunepoulsen.adopt.core.os.api.OperatingSystemException;
 
@@ -15,13 +13,11 @@ public class LocalOS implements OperatingSystem {
 
     @Override
     public File applicationDataDirectory() throws OperatingSystemException {
-        Environment env = new Environment();
+        String localDirectory = System.getProperty( "adopt.local.directory" );
+        if( localDirectory == null ) {
+            throw new OperatingSystemException( "The system property 'adopt.local.directory' does not exist" );
+        }
 
-        try {
-            return new File( env.getString( "adopt.local.directory" ) );
-        }
-        catch( EnvironmentException ex ) {
-            throw new OperatingSystemException( "Unable to OperatingSystem for Local", ex );
-        }
+        return new File( localDirectory );
     }
 }
