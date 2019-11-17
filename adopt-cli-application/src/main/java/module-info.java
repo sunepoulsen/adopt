@@ -7,5 +7,8 @@ module adopt.cli.application {
     requires adopt.cli.commandline;
     requires adopt.cli.command.api;
 
+    uses dk.sunepoulsen.adopt.cli.application.api.AdoptCliApplicationModule;
+
     exports dk.sunepoulsen.adopt.cli.application;
+    exports dk.sunepoulsen.adopt.cli.application.api;
 }

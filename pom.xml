@@ -27,6 +27,7 @@
         <!-- Library versions -->
         <adopt.version>${project.version}</adopt.version>
         <commons-cli.version>1.4</commons-cli.version>
+        <guice.version>4.2.2</guice.version>
         <hibernate-core.version>5.3.7.Final</hibernate-core.version>
         <javafx.version>11.0.2</javafx.version>
         <liquibase-core.version>3.6.3</liquibase-core.version>
@@ -129,6 +130,11 @@
             <!--                Utilities                                                         -->
             <!-- ===============================================================================  -->
 
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
