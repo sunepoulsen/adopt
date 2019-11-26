@@ -15,11 +15,9 @@ import java.util.Optional;
 
 public class CommandLineInterpreter {
     private Registry registry;
-    private CommandRegistry commandRegistry;
 
     public CommandLineInterpreter( Registry registry ) {
         this.registry = registry;
-        this.commandRegistry = new CommandRegistry();
     }
 
     public CommandExecutor parse( List<String> arguments ) throws CliException {
@@ -27,11 +25,7 @@ public class CommandLineInterpreter {
             return parse( Collections.singletonList( new HelpCommandDefinition().name() ) );
         }
 
-        Optional<CommandDefinition> foundCommand = commandRegistry.findCommand( arguments.get( 0 ) );
-        if( foundCommand.isEmpty() ) {
-            throw new CliException( "The command '" + arguments.get( 0 ) + "' does not exist" );
-        }
-        CommandDefinition commandDefinition = foundCommand.get();
+        CommandDefinition commandDefinition = findCommand( arguments.get( 0 ) );
 
         List<String> commandArgs = arguments.subList( 1, arguments.size() );
         CommandLine commandLine;
@@ -53,4 +47,15 @@ public class CommandLineInterpreter {
         return parser.parse( commandDefinition.options(), commandArgs );
     }
 
+    private CommandDefinition findCommand( String commandName ) throws CliException {
+        Optional<CommandDefinition> foundCommand = registry.getInstances( CommandDefinition.class ).stream()
+            .filter( commandDefinition -> commandDefinition.name().equals(commandName) )
+            .findFirst();
+
+        if( foundCommand.isPresent() ) {
+            return foundCommand.get();
+        }
+
+        throw new CliException( "The command {} does not exist", commandName );
+    }
 }
