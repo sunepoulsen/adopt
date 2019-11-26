@@ -1,16 +1,20 @@
 package dk.sunepoulsen.adopt.cli.application;
 
+import com.google.common.collect.Lists;
 import dk.sunepoulsen.adopt.cli.command.api.CliException;
 import dk.sunepoulsen.adopt.cli.command.api.CommandExecutor;
 import dk.sunepoulsen.adopt.cli.commandline.CommandLineInterpreter;
 import dk.sunepoulsen.adopt.core.environment.Environment;
 import dk.sunepoulsen.adopt.core.environment.EnvironmentException;
+import dk.sunepoulsen.adopt.core.registry.api.Registry;
+import dk.sunepoulsen.adopt.core.registry.api.RegistryModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ServiceLoader;
 
 public class AdoptCliApplication {
     public static final String CONSOLE_LOGGER_NAME = "adopt.cli.console.output.logger";
@@ -18,22 +22,15 @@ public class AdoptCliApplication {
     private static Logger log = LoggerFactory.getLogger( AdoptCliApplication.class );
     private static Logger consoleLogger = LoggerFactory.getLogger( AdoptCliApplication.CONSOLE_LOGGER_NAME );
 
-    private Environment env;
     private List<String> arguments;
 
     public AdoptCliApplication() {
-        this.env = new Environment();
-        this.env.logProperties();
     }
 
     public void start() {
     }
 
     public void stop() {
-    }
-
-    public Environment environment() {
-        return this.env;
     }
 
     /**
@@ -57,21 +54,25 @@ public class AdoptCliApplication {
     private void launch( String[] args ) {
         arguments = Arrays.asList(args);
 
+        Registry registry = new Registry( Lists.newArrayList( ServiceLoader.load( RegistryModule.class ).iterator() ));
+        Environment environment = registry.getInstance( Environment.class );
+
         String appName = "unknown";
         String appVersion = "unknown";
 
         try {
-            appName = env.getString( "application.name");
-            appVersion = env.getString( "application.version" );
+            appName = environment.getString( "application.name");
+            appVersion = environment.getString( "application.version" );
         }
         catch( EnvironmentException ex ) {
             log.debug("Unable to read property from environment", ex );
         }
 
         log.info( "Starting {} version {}", appName, appVersion );
+        environment.logProperties();
         start();
 
-        CommandLineInterpreter commandLineInterpreter = new CommandLineInterpreter();
+        CommandLineInterpreter commandLineInterpreter = new CommandLineInterpreter(registry);
         try {
             CommandExecutor commandExecutor = commandLineInterpreter.parse( arguments );
 

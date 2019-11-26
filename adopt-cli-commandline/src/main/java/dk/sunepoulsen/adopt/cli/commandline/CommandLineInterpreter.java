@@ -4,6 +4,7 @@ import dk.sunepoulsen.adopt.cli.command.api.CliException;
 import dk.sunepoulsen.adopt.cli.command.api.CommandDefinition;
 import dk.sunepoulsen.adopt.cli.command.api.CommandExecutor;
 import dk.sunepoulsen.adopt.cli.command.help.HelpCommandDefinition;
+import dk.sunepoulsen.adopt.core.registry.api.Registry;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class CommandLineInterpreter {
+    private Registry registry;
     private CommandRegistry commandRegistry;
 
-    public CommandLineInterpreter() {
+    public CommandLineInterpreter( Registry registry ) {
+        this.registry = registry;
         this.commandRegistry = new CommandRegistry();
     }
 
