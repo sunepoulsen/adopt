@@ -20,7 +20,7 @@ public class DefaultBinding<T> implements RegistryBinding<T> {
 
     @Override
     public void to( Class<? extends T> clazz ) throws RegistryException {
-        repositoryBinding.setInstanceFactory( new RepositoryInstanceFactory( RegistryInstanceScope.SINGLE, new RepositoryClassInstanceProvider<>( clazz ) ) );
+        repositoryBinding.setInstanceFactory( new RepositoryInstanceFactory( RegistryInstanceScope.SINGLE, new RepositoryClassInstanceProvider<>( registryRepository, clazz ) ) );
         this.registryRepository.add(repositoryBinding);
     }
 

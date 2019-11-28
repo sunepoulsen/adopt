@@ -1,7 +1,8 @@
-package dk.sunepoulsen.adopt.core.registry.api;
+package dk.sunepoulsen.adopt.core.registry.registries;
 
+import dk.sunepoulsen.adopt.core.registry.api.Registry;
+import dk.sunepoulsen.adopt.core.registry.api.RegistryException;
 import dk.sunepoulsen.adopt.core.registry.api.binder.RegistryInstanceScope;
-import dk.sunepoulsen.adopt.core.registry.binder.DefaultBinder;
 import dk.sunepoulsen.adopt.core.registry.providers.RepositoryValueInstanceProvider;
 import dk.sunepoulsen.adopt.core.registry.repository.RegistryRepository;
 import dk.sunepoulsen.adopt.core.registry.repository.RegistryRepositoryBinding;
@@ -17,27 +18,18 @@ import java.util.Collections;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @RunWith( MockitoJUnitRunner.class )
-public class RegistryTest {
+public class RegistryReaderTest {
     @Mock
     private RegistryRepository registryRepository;
-
-    @Test
-    public void testRegisterModules() {
-        RegistryModule module = mock( RegistryModule.class);
-
-        new Registry( Collections.singletonList( module ), registryRepository );
-
-        verify( module ).configure( any( DefaultBinder.class ) );
-    }
 
     @Test(expected = RegistryException.class)
     public void testGetInstance_Class_NotFound() {
         when(registryRepository.findBindings( eq(String.class) )).thenReturn( Collections.emptyList() );
 
-        new Registry( Collections.emptyList(), registryRepository ).getInstance( String.class );
+        new RegistryReader( registryRepository ).getInstance( String.class );
     }
 
     @Test
@@ -46,7 +38,7 @@ public class RegistryTest {
         binding.setInstanceFactory( new RepositoryInstanceFactory( RegistryInstanceScope.SINGLE, new RepositoryValueInstanceProvider<>( "value" ) ));
         when(registryRepository.findBindings( eq(String.class) )).thenReturn( Collections.singletonList(binding) );
 
-        Registry registry = new Registry( Collections.emptyList(), registryRepository );
+        Registry registry = new RegistryReader( registryRepository );
         assertThat( registry.getInstance( String.class ), equalTo("value"));
     }
 
@@ -54,7 +46,7 @@ public class RegistryTest {
     public void testGetInstance_ClassAndQualifier_NotFound() {
         when(registryRepository.findBindings( eq(String.class), eq("qualifier") )).thenReturn( Collections.emptyList() );
 
-        new Registry( Collections.emptyList(), registryRepository ).getInstance( String.class, "qualifier" );
+        new RegistryReader( registryRepository ).getInstance( String.class, "qualifier" );
     }
 
     @Test
@@ -63,7 +55,7 @@ public class RegistryTest {
         binding.setInstanceFactory( new RepositoryInstanceFactory( RegistryInstanceScope.SINGLE, new RepositoryValueInstanceProvider<>( "value" ) ));
         when(registryRepository.findBindings( eq(String.class), eq("qualifier") )).thenReturn( Collections.singletonList(binding) );
 
-        Registry registry = new Registry( Collections.emptyList(), registryRepository );
+        Registry registry = new RegistryReader( registryRepository );
         assertThat( registry.getInstance( String.class, "qualifier" ), equalTo("value"));
     }
 
@@ -71,7 +63,7 @@ public class RegistryTest {
     public void testGetInstances_Class_NotFound() {
         when(registryRepository.findBindings( eq(String.class) )).thenReturn( Collections.emptyList() );
 
-        new Registry( Collections.emptyList(), registryRepository ).getInstances( String.class );
+        new RegistryReader( registryRepository ).getInstances( String.class );
     }
 
     @Test
@@ -87,7 +79,7 @@ public class RegistryTest {
 
         when(registryRepository.findBindings( eq(String.class) )).thenReturn( Arrays.asList( binding1, binding2, binding3 ) );
 
-        Registry registry = new Registry( Collections.emptyList(), registryRepository );
+        Registry registry = new RegistryReader( registryRepository );
         assertThat( registry.getInstances( String.class ), equalTo(Arrays.asList( "value-1", "value-2", "value-3")));
     }
 
@@ -95,7 +87,7 @@ public class RegistryTest {
     public void testGetInstances_ClassAndQualifier_NotFound() {
         when(registryRepository.findBindings( eq(String.class), eq("qualifier") )).thenReturn( Collections.emptyList() );
 
-        new Registry( Collections.emptyList(), registryRepository ).getInstances( String.class, "qualifier" );
+        new RegistryReader( registryRepository ).getInstances( String.class, "qualifier" );
     }
 
     @Test
@@ -111,7 +103,7 @@ public class RegistryTest {
 
         when(registryRepository.findBindings( eq(String.class), eq("qualifier") )).thenReturn( Arrays.asList( binding1, binding2, binding3 ) );
 
-        Registry registry = new Registry( Collections.emptyList(), registryRepository );
+        Registry registry = new RegistryReader( registryRepository );
         assertThat( registry.getInstances( String.class, "qualifier" ), equalTo(Arrays.asList( "value-1", "value-2", "value-3")));
     }
 }

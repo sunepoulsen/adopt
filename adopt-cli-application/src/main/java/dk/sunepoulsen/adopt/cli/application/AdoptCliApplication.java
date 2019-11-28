@@ -1,20 +1,18 @@
 package dk.sunepoulsen.adopt.cli.application;
 
-import com.google.common.collect.Lists;
 import dk.sunepoulsen.adopt.cli.command.api.CliException;
 import dk.sunepoulsen.adopt.cli.command.api.CommandExecutor;
 import dk.sunepoulsen.adopt.cli.commandline.CommandLineInterpreter;
 import dk.sunepoulsen.adopt.core.environment.Environment;
 import dk.sunepoulsen.adopt.core.environment.EnvironmentException;
 import dk.sunepoulsen.adopt.core.registry.api.Registry;
-import dk.sunepoulsen.adopt.core.registry.api.RegistryModule;
+import dk.sunepoulsen.adopt.core.registry.api.RegistryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ServiceLoader;
 
 public class AdoptCliApplication {
     public static final String CONSOLE_LOGGER_NAME = "adopt.cli.console.output.logger";
@@ -54,7 +52,7 @@ public class AdoptCliApplication {
     private void launch( String[] args ) {
         arguments = Arrays.asList(args);
 
-        Registry registry = new Registry( Lists.newArrayList( ServiceLoader.load( RegistryModule.class ).iterator() ));
+        Registry registry = RegistryFactory.createRegistryFromModules();
         Environment environment = registry.getInstance( Environment.class );
 
         String appName = "unknown";

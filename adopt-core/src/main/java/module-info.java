@@ -19,13 +19,15 @@ module adopt.core {
         dk.sunepoulsen.adopt.core.environment.services.EnvironmentSystemProperties,
         dk.sunepoulsen.adopt.core.environment.services.EnvironmentApplicationProperties;
 
+    uses dk.sunepoulsen.adopt.core.os.api.OperatingSystem;
+
     provides dk.sunepoulsen.adopt.core.os.api.OperatingSystem with
         dk.sunepoulsen.adopt.core.os.services.LocalOS,
         dk.sunepoulsen.adopt.core.os.services.MacOS;
 
+    uses dk.sunepoulsen.adopt.core.registry.api.RegistryModule;
+
     provides dk.sunepoulsen.adopt.core.registry.api.RegistryModule with
         dk.sunepoulsen.adopt.core.registry.modules.EnvironmentModule,
         dk.sunepoulsen.adopt.core.registry.modules.OperatingSystemModule;
-
-    uses dk.sunepoulsen.adopt.core.os.api.OperatingSystem;
 }

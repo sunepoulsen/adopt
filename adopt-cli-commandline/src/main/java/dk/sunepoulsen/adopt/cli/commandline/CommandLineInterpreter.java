@@ -22,7 +22,7 @@ public class CommandLineInterpreter {
 
     public CommandExecutor parse( List<String> arguments ) throws CliException {
         if( arguments.isEmpty() ) {
-            return parse( Collections.singletonList( new HelpCommandDefinition().name() ) );
+            return parse( Collections.singletonList( HelpCommandDefinition.COMMAND_NAME ) );
         }
 
         CommandDefinition commandDefinition = findCommand( arguments.get( 0 ) );
