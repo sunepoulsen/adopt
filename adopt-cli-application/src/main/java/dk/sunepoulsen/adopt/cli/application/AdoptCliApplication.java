@@ -21,6 +21,7 @@ public class AdoptCliApplication {
     private static Logger consoleLogger = LoggerFactory.getLogger( AdoptCliApplication.CONSOLE_LOGGER_NAME );
 
     private List<String> arguments;
+    private Registry registry;
 
     public AdoptCliApplication() {
     }
@@ -49,10 +50,14 @@ public class AdoptCliApplication {
         }
     }
 
+    protected Registry getRegistry() {
+        return this.registry;
+    }
+
     private void launch( String[] args ) {
         arguments = Arrays.asList(args);
 
-        Registry registry = RegistryFactory.createRegistryFromModules();
+        registry = RegistryFactory.createRegistryFromModules();
         Environment environment = registry.getInstance( Environment.class );
 
         String appName = "unknown";
