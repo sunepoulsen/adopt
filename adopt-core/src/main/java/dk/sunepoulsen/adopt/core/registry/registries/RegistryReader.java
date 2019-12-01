@@ -2,6 +2,7 @@ package dk.sunepoulsen.adopt.core.registry.registries;
 
 import dk.sunepoulsen.adopt.core.registry.api.Registry;
 import dk.sunepoulsen.adopt.core.registry.api.RegistryException;
+import dk.sunepoulsen.adopt.core.registry.providers.RepositoryClassInstanceProvider;
 import dk.sunepoulsen.adopt.core.registry.repository.RegistryRepository;
 import dk.sunepoulsen.adopt.core.registry.repository.RegistryRepositoryBinding;
 
@@ -57,6 +58,11 @@ public class RegistryReader implements Registry {
         return bindings.stream()
             .map(binding -> clazz.cast(binding.getInstanceFactory().getInstance()))
             .collect( Collectors.toList());
+    }
+
+    @Override
+    public <T> T newInstance( Class<T> clazz ) throws RegistryException {
+        return (T)(new RepositoryClassInstanceProvider( registryRepository, clazz).getInstance());
     }
 
     private <T> List<RegistryRepositoryBinding> findBindings( Class<T> clazz ) throws RegistryException {
