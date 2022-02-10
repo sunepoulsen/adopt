@@ -27,7 +27,7 @@
         <!-- Library versions -->
         <adopt.version>${project.version}</adopt.version>
         <commons-cli.version>1.4</commons-cli.version>
-        <hibernate-core.version>5.3.7.Final</hibernate-core.version>
+        <hibernate-core.version>5.4.24.Final</hibernate-core.version>
         <javafx.version>11.0.2</javafx.version>
         <liquibase-core.version>3.6.3</liquibase-core.version>
         <log4j-over-slf4j.version>1.7.21</log4j-over-slf4j.version>
